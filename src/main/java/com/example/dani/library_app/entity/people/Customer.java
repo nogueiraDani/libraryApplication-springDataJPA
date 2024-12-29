@@ -1,6 +1,5 @@
 package com.example.dani.library_app.entity.people;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import com.example.dani.library_app.entity.locality.Address;
@@ -19,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "CUSTOMERS")
-public class Customer extends Person implements Serializable {
+public class Customer extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

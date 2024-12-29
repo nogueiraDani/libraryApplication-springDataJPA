@@ -1,6 +1,5 @@
 package com.example.dani.library_app.entity.people;
 
-import java.io.Serializable;
 import java.util.List;
 import com.example.dani.library_app.entity.locality.Address;
 import jakarta.persistence.Column;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "EMPLOYEES")
-public class Employee extends Person implements Serializable {
+public class Employee extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
