@@ -1,11 +1,11 @@
-package com.example.dani.library_app.entity.products;
+package com.project.dani.library_app.entity.products;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import com.example.dani.library_app.entity.people.Customer;
-import com.example.dani.library_app.entity.people.Employee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.dani.library_app.entity.people.Customer;
+import com.project.dani.library_app.entity.people.Employee;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.example.dani.library_app.entity.locality;
+package com.project.dani.library_app.entity.locality;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;

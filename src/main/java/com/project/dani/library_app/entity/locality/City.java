@@ -1,10 +1,9 @@
-package com.example.dani.library_app.entity.products;
+package com.project.dani.library_app.entity.locality;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -13,16 +12,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "STOCKS")
-public class Stock implements Serializable {
+@Table(name = "CITIES")
+public class City implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_stock", nullable = false)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "id_city", nullable = false)
     private Long id;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
+    @Column(name = "name", nullable = false, length = 50)   
+    private String name;
 
     @Override
     public int hashCode() {
@@ -40,7 +39,7 @@ public class Stock implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Stock other = (Stock) obj;
+        City other = (City) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -51,9 +50,10 @@ public class Stock implements Serializable {
 
     @Override
     public String toString() {
-        return "Stock [id=" + id + "]";
+        return "City [id=" + id + "]";
     }
 
+    
 
-
+    
 }

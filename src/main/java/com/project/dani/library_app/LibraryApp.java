@@ -1,4 +1,4 @@
-package com.example.dani.library_app;
+package com.project.dani.library_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,14 +1,11 @@
-package com.example.dani.library_app.entity.people;
+package com.project.dani.library_app.entity.products;
 
-import java.util.List;
-import com.example.dani.library_app.entity.locality.Address;
+import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,27 +13,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "EMPLOYEES")
-public class Employee extends Person {
+@Table(name = "STOCKS")
+public class Stock implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_employee", nullable = false)
+    @Column(name = "id_stock", nullable = false)
     private Long id;
 
-    
-    @Column(name = "salary", nullable = false, length = 50)
-    private String salary;
-
-    @Column(name = "admission_date", nullable = false, length = 50)
-    private String admissionDate;
-
-    @Column(name = "role", nullable = false, length = 50)
-    private String role;
-
-    @OneToMany
-    @JoinColumn(name = "id_address")
-    private List<Address> address;
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
     @Override
     public int hashCode() {
@@ -54,7 +40,7 @@ public class Employee extends Person {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Employee other = (Employee) obj;
+        Stock other = (Stock) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -65,7 +51,9 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Employee [id=" + id + "]";
+        return "Stock [id=" + id + "]";
     }
+
+
 
 }

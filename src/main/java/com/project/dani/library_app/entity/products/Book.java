@@ -1,9 +1,9 @@
-package com.example.dani.library_app.entity.products;
+package com.project.dani.library_app.entity.products;
 
 import java.io.Serializable;
 import java.util.List;
-import com.example.dani.library_app.entity.people.Writer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.dani.library_app.entity.people.Writer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

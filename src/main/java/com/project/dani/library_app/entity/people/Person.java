@@ -1,4 +1,4 @@
-package com.example.dani.library_app.entity.people;
+package com.project.dani.library_app.entity.people;
 
 import java.io.Serializable;
 import java.time.LocalDate;

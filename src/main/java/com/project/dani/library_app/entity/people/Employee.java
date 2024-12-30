@@ -1,11 +1,14 @@
-package com.example.dani.library_app.entity.locality;
+package com.project.dani.library_app.entity.people;
 
-import java.io.Serializable;
+import java.util.List;
+import com.project.dani.library_app.entity.locality.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,16 +16,27 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "COUNTRIES")
-public class Country implements Serializable{
+@Table(name = "EMPLOYEES")
+public class Employee extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_country", nullable = false)
+    @Column(name = "id_employee", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    
+    @Column(name = "salary", nullable = false, length = 50)
+    private String salary;
+
+    @Column(name = "admission_date", nullable = false, length = 50)
+    private String admissionDate;
+
+    @Column(name = "role", nullable = false, length = 50)
+    private String role;
+
+    @OneToMany
+    @JoinColumn(name = "id_address")
+    private List<Address> address;
 
     @Override
     public int hashCode() {
@@ -40,7 +54,7 @@ public class Country implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Country other = (Country) obj;
+        Employee other = (Employee) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -51,9 +65,7 @@ public class Country implements Serializable{
 
     @Override
     public String toString() {
-        return "Country [id=" + id + "]";
+        return "Employee [id=" + id + "]";
     }
-
-    
 
 }

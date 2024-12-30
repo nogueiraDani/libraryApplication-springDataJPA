@@ -1,27 +1,37 @@
-package com.example.dani.library_app.entity.locality;
+package com.project.dani.library_app.entity.people;
 
-import java.io.Serializable;
+import java.util.List;
+import com.project.dani.library_app.entity.locality.Address;
+import com.project.dani.library_app.entity.products.Book;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "CITIES")
-public class City implements Serializable {
-
+@Table(name = "WRITERS")
+public class Writer extends Person{
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "id_city", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_writer", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)   
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "id_book", nullable = false)
+    private Book book;
+
+    @OneToMany
+    @JoinColumn(name = "id_address")
+    private List<Address> address;    
 
     @Override
     public int hashCode() {
@@ -39,7 +49,7 @@ public class City implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        City other = (City) obj;
+        Writer other = (Writer) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -50,10 +60,9 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "City [id=" + id + "]";
+        return "Writer [id=" + id + "]";
     }
 
     
 
-    
 }

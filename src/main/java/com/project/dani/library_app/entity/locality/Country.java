@@ -1,37 +1,28 @@
-package com.example.dani.library_app.entity.people;
+package com.project.dani.library_app.entity.locality;
 
-import java.util.List;
-import com.example.dani.library_app.entity.locality.Address;
-import com.example.dani.library_app.entity.products.Book;
+import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "WRITERS")
-public class Writer extends Person{
+@Table(name = "COUNTRIES")
+public class Country implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_writer", nullable = false)
+    @Column(name = "id_country", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_book", nullable = false)
-    private Book book;
-
-    @OneToMany
-    @JoinColumn(name = "id_address")
-    private List<Address> address;    
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
     @Override
     public int hashCode() {
@@ -49,7 +40,7 @@ public class Writer extends Person{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Writer other = (Writer) obj;
+        Country other = (Country) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -60,7 +51,7 @@ public class Writer extends Person{
 
     @Override
     public String toString() {
-        return "Writer [id=" + id + "]";
+        return "Country [id=" + id + "]";
     }
 
     

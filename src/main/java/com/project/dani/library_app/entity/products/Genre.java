@@ -1,4 +1,4 @@
-package com.example.dani.library_app.entity.products;
+package com.project.dani.library_app.entity.products;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;

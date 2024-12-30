@@ -1,8 +1,8 @@
-package com.example.dani.library_app.entity.people;
+package com.project.dani.library_app.entity.people;
 
 import java.time.LocalDate;
 import java.util.List;
-import com.example.dani.library_app.entity.locality.Address;
+import com.project.dani.library_app.entity.locality.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
