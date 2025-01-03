@@ -25,6 +25,10 @@ public class CountryService {
         return this.countryRepository.findById(id);
     }
 
+    public List<Country> findByNameContains(String name) {
+        return this.countryRepository.findByNameContains(name);
+    }
+
     @Transactional(readOnly = true)
     public List<Country> findAll() {
         return this.countryRepository.findAll();
@@ -54,6 +58,7 @@ public class CountryService {
     public void deleteAll() {
         this.countryRepository.deleteAll();
     }
+
 
 
 

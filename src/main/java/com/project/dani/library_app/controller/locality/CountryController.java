@@ -34,6 +34,11 @@ public class CountryController {
         return countryService.findById(id);
     }
 
+    @GetMapping("name/{name}")
+    public List<Country> readByName(@PathVariable String name) {
+        return countryService.findByNameContains(name);
+    }
+
     @GetMapping("all")
     public List<Country> readAll() {
         return countryService.findAll();

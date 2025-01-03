@@ -18,4 +18,6 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
     @Query("SELECT c FROM Country c ORDER BY c.name DESC")
     List<Country> findAllOrderByNameDesc();
 
+    List<Country> findByNameContains(String name);
+
 }
