@@ -53,7 +53,7 @@ public class StateController {
     }
 
     @PutMapping("id/{id}")
-    public Optional<State> updateCountry(@PathVariable Long id, @RequestBody String name) {
+    public Optional<State> updateState(@PathVariable Long id, @RequestBody String name) {
         stateService.updateById(id, name);
         return stateService.findById(id);
     }
