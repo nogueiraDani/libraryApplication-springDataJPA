@@ -1,12 +1,15 @@
 package com.project.dani.library_app.entity.locality;
 
 import java.io.Serializable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,11 +20,15 @@ import lombok.Setter;
 public class Country implements Serializable{
 
     @Id
+    @Column(name = "id_country")
+    @Schema(hidden = true)
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_country", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @NotNull
+    @Size(min = 0, max = 50)
+    @Column(name = "name")
     private String name;
 
     @Override
