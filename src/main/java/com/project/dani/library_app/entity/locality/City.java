@@ -1,11 +1,15 @@
 package com.project.dani.library_app.entity.locality;
 
 import java.io.Serializable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +17,20 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "CITIES")
+@Schema(description = "City entity")
 public class City implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "id_city", nullable = false)
+    @Schema(hidden = true, description = "Unique identifier of the City", example = "1")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)   
+    @NotNull
+    @Size(min = 0, max = 50)
+    @Schema(description = "Name of the City", example = "Blumenau")
+    @Column(name = "name", length = 50, nullable = false)   
     private String name;
 
     @Override

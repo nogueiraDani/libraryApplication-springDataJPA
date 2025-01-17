@@ -1,13 +1,15 @@
 package com.project.dani.library_app.entity.products;
 
 import java.io.Serializable;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,27 +17,25 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "PUBLISHERS")
+@Schema(description = "Publisher entity")
 public class Publisher implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_publisher", nullable = false)
+    @Schema(hidden = true, description = "Unique identifier of the Publisher",
+            example = "1")
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cnpj", nullable = false, length = 14)
-    private String cnpj;
-
+    @NotNull
+    @Size(min = 0, max = 100)
+    @Schema(description = "Publishier name", example = "Principis")
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "phone", length = 20)   
-    private String phone;
-
-    @Column(name = "email", length = 100)
-    private String email;
-
-    @Column(name = "website", length = 100)
-    private String website;
-
+    @NotNull
+    @Schema(description = "Publishier status", example = "True")
     @Column(name = "active", nullable = false)
     private Boolean active;
 
@@ -69,6 +69,6 @@ public class Publisher implements Serializable {
         return "Publisher [id=" + id + "]";
     }
 
-    
+
 
 }

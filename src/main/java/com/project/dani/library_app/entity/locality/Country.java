@@ -17,18 +17,21 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "COUNTRIES")
-public class Country implements Serializable{
+@Schema(description = "Country entity")
+public class Country implements Serializable {
 
     @Id
-    @Column(name = "id_country")
-    @Schema(hidden = true)
+    @Column(name = "id_country", nullable = false)
+    @Schema(hidden = true, description = "Unique identifier of the country",
+            example = "1")
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(min = 0, max = 50)
-    @Column(name = "name")
+    @Schema(description = "Name of the country", example = "Brazil")
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     @Override
@@ -61,6 +64,6 @@ public class Country implements Serializable{
         return "Country [id=" + id + "]";
     }
 
-    
+
 
 }

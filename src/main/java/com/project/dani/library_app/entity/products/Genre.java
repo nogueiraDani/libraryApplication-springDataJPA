@@ -1,6 +1,7 @@
 package com.project.dani.library_app.entity.products;
 
 import java.io.Serializable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,19 +19,30 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "GENRES")
-public class Genre implements Serializable{
+@Schema(description = "Genre entity")
+public class Genre implements Serializable {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_genre", nullable = false)
+    @Schema(hidden = true, description = "Unique identifier of the Genre",
+            example = "1")
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 0, max = 100)
+    @Schema(description = "Genre name", example = "Ficção")
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Size(min = 0, max = 255)
+    @Schema(description = "Genre name", example = "Ficção literária")
     @Column(name = "description", length = 255)
     private String description;
 
     @ManyToOne
+    @Schema(description = "Book id", example = "1")
     @JoinColumn(name = "id_book", nullable = false)
     private Book book;
 

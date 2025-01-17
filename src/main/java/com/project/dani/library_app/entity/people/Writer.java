@@ -3,15 +3,18 @@ package com.project.dani.library_app.entity.people;
 import java.util.List;
 import com.project.dani.library_app.entity.locality.Address;
 import com.project.dani.library_app.entity.products.Book;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,19 +22,27 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "WRITERS")
-public class Writer extends Person{
+public class Writer extends Person {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_writer", nullable = false)
+    @Schema(hidden = true, description = "Unique identifier of the Writer", example = "1")
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_book", nullable = false)
-    private Book book;
+    @NotNull
+    @Schema(description = "Book id", example = "1")
+    @ManyToMany
+    @JoinTable(name = "writer_books", joinColumns = @JoinColumn(name = "writer_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> books;
 
+    @NotNull
     @OneToMany
-    @JoinColumn(name = "id_address")
-    private List<Address> address;    
+    @Schema(description = "Book id", example = "1")
+    @JoinColumn(name = "id_address", nullable = false)
+    private List<Address> address;
 
     @Override
     public int hashCode() {
@@ -63,6 +74,6 @@ public class Writer extends Person{
         return "Writer [id=" + id + "]";
     }
 
-    
+
 
 }
