@@ -44,7 +44,7 @@ public class Customer extends Person {
 
     @NotNull
     @Schema(description = "Loan id", example = "1")
-    @OneToMany(mappedBy = "customer")//TODO: tem erro aqui
+    @OneToMany(mappedBy = "customer")
     private List<Loan> loans;
 
     @Override

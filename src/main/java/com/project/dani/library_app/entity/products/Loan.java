@@ -15,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -47,13 +46,13 @@ public class Loan implements Serializable{
     @NotNull
     @ManyToOne
     @Schema(description = "Customer id", example = "1")
-    @JoinColumn(name = "id_customer") //TODO: tem erro aqui
+    @JoinColumn(name = "id_customer") 
     private Customer customer;
 
     @NotNull
     @ManyToOne
     @Schema(description = "Employee id", example = "1")
-    @JoinColumn(name = "id_employee") // TODO: tem erro aqui
+    @JoinColumn(name = "id_employee")
     private Employee employee;
 
     @NotNull
