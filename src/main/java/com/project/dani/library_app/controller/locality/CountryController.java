@@ -1,7 +1,6 @@
 package com.project.dani.library_app.controller.locality;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -63,7 +62,7 @@ public class CountryController {
                         @ApiResponse(responseCode = "401", description = "unauthorized",
                                         content = {@Content})})
         @GetMapping("id/{id}")
-        public Optional<Country> readById(@Valid @PathVariable Long id) {
+        public Country readById(@Valid @PathVariable Long id) {
                 return countryService.findById(id);
         }
 
@@ -152,9 +151,9 @@ public class CountryController {
                                         content = {@Content})})
         @ResponseStatus(HttpStatus.OK)
         @PutMapping("id/{id}")
-        public Optional<Country> updateCountry(@Valid @PathVariable Long id,
+        public Country updateCountry(@Valid @PathVariable Long id,
                         @RequestBody String name) {
-                countryService.updateById(id, name);
+                countryService.updateCountryNameById(id, name);
                 return countryService.findById(id);
         }
 
@@ -175,22 +174,6 @@ public class CountryController {
         @DeleteMapping("id/{id}")
         public void deleteCountryById(@Valid @PathVariable Long id) {
                 countryService.deleteById(id);
-        }
-
-        @Operation(summary = "Delete all countries", description = "Delete all countries")
-        @ApiResponses(value = {
-                        @ApiResponse(description = "Success", responseCode = "200",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Bad request", responseCode = "400",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Unauthorized", responseCode = "401",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Internal error", responseCode = "500",
-                                        content = {@Content})})
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        @DeleteMapping("all")
-        public void deleteAllCountry() {
-                countryService.deleteAll();
         }
 
 }

@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Country implements Serializable {
 
     @Id
-    @Column(name = "id_country", nullable = false)
+    @Column(name = "id_country", nullable = false, unique = true)
     @Schema(hidden = true, description = "Unique identifier of the country",
             example = "1")
     @NotNull
@@ -31,7 +31,7 @@ public class Country implements Serializable {
     @NotNull
     @Size(min = 0, max = 50)
     @Schema(description = "Name of the country", example = "Brazil")
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
 
     @Override
