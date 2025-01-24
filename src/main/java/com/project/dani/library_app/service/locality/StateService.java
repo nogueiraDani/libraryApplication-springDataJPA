@@ -1,62 +1,101 @@
 package com.project.dani.library_app.service.locality;
 
 import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.project.dani.library_app.entity.locality.State;
 import com.project.dani.library_app.repository.locality.StateRepository;
+import com.project.dani.library_app.service.ValidationService;
 
 @Service
 public class StateService {
 
-    @Autowired
-    private StateRepository stateRepository;
+    private final StateRepository stateRepository;
+    private final ValidationService validationService;
 
-    @Transactional
-    public State save(State state) {
-        return this.stateRepository.save(state);
+
+    public StateService(StateRepository stateRepository,
+            ValidationService validationService) {
+        this.stateRepository = stateRepository;
+        this.validationService = validationService;
     }
 
+    // --------
+    // CREATE
+    // --------
+    @Transactional
+    public void save(State state) {
+        this.validationService.validateUniqueField(stateRepository,
+                stateRepository.findByName(state.getName()),
+                "-- O estado " + state.getName() + " já está cadastrado. --");
+
+        this.stateRepository.save(state);
+    }
+
+    // --------
+    // READ
+    // --------
     @Transactional(readOnly = true)
-    public Optional<State> findById(Long id) {
-        return this.stateRepository.findById(id);
+    public State findById(Long id) {
+        return this.stateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "-- Estado com ID fornecido não foi encontrado.--"));
     }
 
     @Transactional(readOnly = true)
     public List<State> findByNameContains(String name) {
-        return this.stateRepository.findByNameContains(name);
+        List<State> result = this.stateRepository.findByNameContains(name);
+        return this.validationService.validateListNotEmpty(result,
+                "-- Não foi encontrado nenhum estado com " + name + ". --");
     }
 
     @Transactional(readOnly = true)
     public List<State> findAll() {
-        return this.stateRepository.findAll();
+        List<State> result = this.stateRepository.findAll();
+        return this.validationService.validateListNotEmpty(result,
+                "-- Não há nenhum estado cadastrado. --");
     }
 
     @Transactional(readOnly = true)
     public List<State> findAllOrderByNameAsc() {
-        return this.stateRepository.findAllOrderByNameAsc();
+        List<State> result = this.stateRepository.findAllOrderByNameAsc();
+        return this.validationService.validateListNotEmpty(result,
+                "-- Não há nenhum estado cadastrado. --");
     }
 
     @Transactional(readOnly = true)
     public List<State> findAllOrderByNameDesc() {
-        return this.stateRepository.findAllOrderByNameDesc();
+        List<State> result = this.stateRepository.findAllOrderByNameDesc();
+        return this.validationService.validateListNotEmpty(result,
+                "-- Não há nenhum estado cadastrado. --");
     }
 
+    // --------
+    // UPDATE
+    // --------
     @Transactional
     public void updateById(Long id, String name) {
-        this.stateRepository.updateById(id, name);
+        this.validationService.validateUniqueField(stateRepository,
+                stateRepository.findById(id),
+                "-- País com o ID fornecido não foi encontrado. --");
+
+        State state = this.validationService.validateEntityFindById(stateRepository, id,
+                "-- Estado com o ID fornecido não foi encontrado. --");
+
+        state.setName(name);
+
+        this.stateRepository.save(state);
     }
 
+    // --------
+    // DELETE
+    // --------
     @Transactional
     public void deleteById(Long id) {
-        this.stateRepository.deleteById(id);
-    }
+        this.validationService.validateEntityExistsById(stateRepository, id,
+                "-- Estado com o ID fornecido não foi encontrado. --");
 
-    @Transactional
-    public void deleteAll() {
-        this.stateRepository.deleteAll();
+        this.stateRepository.deleteById(id);
     }
 
 }

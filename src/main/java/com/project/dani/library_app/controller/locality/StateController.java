@@ -45,7 +45,8 @@ public class StateController {
                                         content = {@Content})})
         @PostMapping
         public State createState(@Valid @RequestBody State state) {
-                return stateService.save(state);
+                stateService.save(state);
+                return state;
         }
 
         // ------------------
@@ -63,7 +64,7 @@ public class StateController {
                         @ApiResponse(responseCode = "401", description = "unauthorized",
                                         content = {@Content})})
         @GetMapping("id/{id}")
-        public Optional<State> readById(@Valid @PathVariable Long id) {
+        public State readById(@Valid @PathVariable Long id) {
                 return stateService.findById(id);
         }
 
@@ -153,8 +154,7 @@ public class StateController {
                                         content = {@Content})})
         @ResponseStatus(HttpStatus.OK)
         @PutMapping("id/{id}")
-        public Optional<State> updateState(@Valid @PathVariable Long id,
-                        @RequestBody String name) {
+        public State updateState(@Valid @PathVariable Long id, @RequestBody String name) {
                 stateService.updateById(id, name);
                 return stateService.findById(id);
         }
@@ -176,22 +176,6 @@ public class StateController {
         @DeleteMapping("id/{id}")
         public void deleteStateById(@Valid @PathVariable Long id) {
                 stateService.deleteById(id);
-        }
-
-        @Operation(summary = "Delete all states", description = "Delete all states")
-        @ApiResponses(value = {
-                        @ApiResponse(description = "No content", responseCode = "204",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Bad request", responseCode = "400",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Unauthorized", responseCode = "401",
-                                        content = {@Content}),
-                        @ApiResponse(description = "Internal error", responseCode = "500",
-                                        content = {@Content})})
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        @DeleteMapping("all")
-        public void deleteAllState() {
-                stateService.deleteAll();
         }
 
 }
