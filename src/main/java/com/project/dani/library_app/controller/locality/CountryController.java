@@ -44,7 +44,7 @@ public class CountryController {
                                         content = {@Content})})
         @PostMapping
         public Country createCountry(@Valid @RequestBody Country country) {
-                                countryService.save(country);
+                countryService.save(country);
                 return country;
         }
 
